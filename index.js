@@ -7,10 +7,8 @@ import Router from "./routes/router.js";
 import cors from "cors";
 import https from "https";
 import path from "path";
-import fs from "fs";
 import AdminRouter from "./routes/Admin/router.js";
 import { fileURLToPath } from "url";
-
 // Dirname on ES6 Module
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,7 +16,6 @@ const __dirname = path.dirname(__filename);
 //configs
 const port = config.get("server.port");
 const bd = config.get("databse.mongoURL");
-const isDevelopment = config.get("dev");
 
 //routing
 const app = express();
@@ -37,9 +34,9 @@ app.use(function (req, res, next) {
 app.use(express.json());
 
 // ROUTES
-
 app.get("/", (req, res) => {
-  return res.status(200);
+  console.log('kpela')
+  return res.status(200).send({connected:true});
 });
 app.use("/user", UserRouter);
 app.use("/api", Router);
